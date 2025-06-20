@@ -15,10 +15,12 @@ windowsFonts(meiryo = "Meiryo UI")
 ## download ----
 dir <- "your directory" # directory
 url <- "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040187500&fileKind=4"
-# download.file(
-#   url = url, 
-#   destfile = paste0(dir, "/data/概況_202503.xlsx"), mode = "wb") # 作業 directory の下に data directory を作成
+download.file(
+  url = url,
+  destfile = paste0(dir, "/data/概況.xlsx"), 
+  mode = "wb") # 作業 directory の下に data directory を作成
 
+paste0(dir, "/data/概況.xlsx")
 ## 事前準備 ----
 ### 産業の表示順 ----
 
@@ -44,7 +46,7 @@ industry_levels <- c(
 ## 一般労働者 ----
 ### 表 1 ----
 dat_hyo1_一般 <- readxl::read_xlsx(
-  paste0(dir, "./data/概況_202503.xlsx"), 
+  paste0(dir, "./data/概況.xlsx"), 
   sheet = "給与額", range = "B27:L44"
   )
 
@@ -73,7 +75,7 @@ dat_hyo1_一般2 <- dat_hyo1_一般 %>%
 
 ### 表 2 ----
 dat_hyo2_一般 <- readxl::read_xlsx(
-  paste0(dir, "./data/概況_202503.xlsx"), 
+  paste0(dir, "./data/概況.xlsx"), 
   sheet = "時間", range = "B27:J44"
 )
 
@@ -100,7 +102,7 @@ dat_hyo2_一般2 <- dat_hyo2_一般 %>%
 
 ### 表 3 ----
 dat_hyo3_一般 <- readxl::read_xlsx(
-  paste0(dir, "./data/概況_202503.xlsx"), 
+  paste0(dir, "./data/概況.xlsx"), 
   sheet = "雇用", range = "B27:J44"
 )
 
@@ -128,7 +130,7 @@ dat_hyo3_一般2 <- dat_hyo3_一般 %>%
 ## パートタイム労働者 ----
 ### 表 1 ----
 dat_hyo1_パート <- readxl::read_xlsx(
-  paste0(dir, "./data/概況_202503.xlsx"), 
+  paste0(dir, "./data/概況.xlsx"), 
   sheet = "給与額", range = "B47:L64"
 )
 
@@ -157,7 +159,7 @@ dat_hyo1_パート2 <- dat_hyo1_パート %>%
 
 ### 表 2 ----
 dat_hyo2_パート <- readxl::read_xlsx(
-  paste0(dir, "./data/概況_202503.xlsx"), 
+  paste0(dir, "./data/概況.xlsx"), 
   sheet = "時間", range = "B47:J64"
 )
 
@@ -184,7 +186,7 @@ dat_hyo2_パート2 <- dat_hyo2_パート %>%
 
 ### 表 3 ----
 dat_hyo3_パート <- readxl::read_xlsx(
-  paste0(dir, "./data/概況_202503.xlsx"), 
+  paste0(dir, "./data/概況.xlsx"), 
   sheet = "雇用", range = "B47:J64"
 )
 
@@ -302,9 +304,9 @@ fig_hyo1_パート <- dat_hyo1_パート2 %>%
 fig_hyo1_パート
 # canvas(units = "in", height = 8, width = 12)
 
-# ggsave(filename = "パートタイム労働者_所定内給与.jpeg", plot = fig_hyo1_パート,
-#        path = paste0(dir, "./out"),
-#        units = "in", height = 7, width = 10)
+ggsave(filename = "パートタイム労働者_所定内給与.jpeg", plot = fig_hyo1_パート,
+       path = paste0(dir, "./out"),
+       units = "in", height = 7, width = 10)
 
 # 表2 ----
 ## 一般労働者 ----
@@ -347,10 +349,10 @@ fig_hyo2_一般 <- dat_hyo2_一般2 %>%
         )
   # canvas(units = "in", height = 8, width = 12)
 
-# ggsave(filename = "一般労働者_総実労働時間.jpeg", plot = fig_hyo2_一般,
-#        path = paste0(dir, "./out"),
-#        units = "in", height = 7, width = 10
-#        )
+ggsave(filename = "一般労働者_総実労働時間.jpeg", plot = fig_hyo2_一般,
+       path = paste0(dir, "./out"),
+       units = "in", height = 7, width = 10
+       )
 
 ## パートタイム労働者 ----
 fig_hyo2_パート <- dat_hyo2_パート2 %>% 
@@ -391,9 +393,9 @@ fig_hyo2_パート <- dat_hyo2_パート2 %>%
         axis.text.y = element_text(size = 11),
         )
 
-ggsave(filename = "パートタイム労働者_総実労働時間.jpeg", plot = fig_hyo2_パート,
-       path = paste0(dir, "./out"),
-       units = "in", height = 7, width = 10)
+# ggsave(filename = "パートタイム労働者_総実労働時間.jpeg", plot = fig_hyo2_パート,
+#        path = paste0(dir, "./out"),
+#        units = "in", height = 7, width = 10)
 
 # 表 3 ----
 ## 一般労働者 ----
@@ -492,6 +494,6 @@ fig_hyo3_パート <- dat_hyo3_パート2 %>%
         )
 # canvas(units = "in", height = 8, width = 12)
 
-ggsave(filename = "パートタイム労働者_労働者総数・入職率・離職率.jpeg", plot = fig_hyo3_パート,
-       units = "in", height = 7, width = 10,
-       path = paste0(dir, "./out"))
+# ggsave(filename = "パートタイム労働者_労働者総数・入職率・離職率.jpeg", plot = fig_hyo3_パート,
+#        units = "in", height = 7, width = 10,
+#        path = paste0(dir, "./out"))
